@@ -1,0 +1,93 @@
+* { touch-action: pan-y; } 
+/* .index{ width:100vw; height:100%;} */
+.index{width:100vw;}
+header {
+    position:fixed; top:0;left:0; z-index: 10;
+    width:100%; height:0.9rem; background: rgb(59, 152, 240);
+    line-height: 0.9rem; color:white; font-size: 0.4rem; 
+}
+.top_logo1{
+    margin-left:0.4rem;  margin-right:0.5rem;
+}
+header span{display: inline-block; padding-bottom:-0.1rem; font-size:0.35rem;}
+header div{
+    float: right; margin-right:0.3rem;
+}
+.top_logo2{
+    margin-right:0.4rem;
+}
+.top_logo3{
+    margin-right:0.3rem; 
+}
+.banner{width:100%; height:4.5rem; overflow: hidden; margin-top:0.9rem;}
+
+/* 轮播图样式 */
+
+.ant-carousel .slick-slide {
+    text-align: center; float: left;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    background: #364d79;
+    overflow: hidden;
+  }
+ 
+  .ant-carousel .slick-slide h3 {
+    color: #fff;
+  }
+.ban_img{
+    width:100%; 
+}
+
+/* ------------ */
+
+footer{
+    width:100%; padding:0.2rem 0.15rem; 
+}
+footer h2{
+    margin:0.2rem 0.2rem 0.4rem; color:rgb(139, 139, 139);
+}
+.newbox{
+    padding:0.2rem 0.2rem 0.2rem 0.3rem; margin-bottom:0.2rem;
+    background: rgb(255, 255, 255); border-radius: 0.2rem;
+    content:'';display:block;clear:both; 
+    box-shadow: 0 0.06rem 0.05rem #b1abab;
+}
+.newbox p{float: left; width:72%; margin-top:0.2rem; font-size:0.31rem; line-height:0.4rem;}
+
+.newright{
+    float: right; width:25%; 
+}
+.newright img{width:100%; border-radius: 0.05rem;}
+.clearfix:after{content:'';display:block; clear:both;}
+
+.siabar{
+    display: flex; transition: 0.5s;
+    position: fixed; top:0; left:-100%; z-index: 22;
+    width:100vw; height:100vh;
+}
+.siabar>.left{
+    width:70%; height:100%; background: rgb(252, 249, 249);
+}
+.siabar .top{
+    background:rgb(59, 152, 240); padding:0.2rem 0.3rem 0; height:2rem; color:white; }
+
+.siabar .imgs img{width:100%; }
+.siabar .imgs{float: left; width:0.8rem; height:0.8rem; border-radius: 50%;
+    overflow: hidden; line-height: 0.8rem; margin-right:0.3rem;
+}
+.siabar .text{float: left; margin-left:0.2rem; margin-top:0.25rem;}
+.siabar>#right{
+    flex: 1; background:black; opacity: 0; transition: 1s;
+}
+.siabar .bottom{
+    margin-top:1.2rem;
+}
+.sc{margin-right:0.3rem;}
+.aas{margin-right:0.7rem;}
+.xz{margin-right:0.3rem;}
+.sy{
+    height:0.8rem; line-height:0.8rem;  
+}
+.shouye{
+    margin:0 0.3rem;
+}

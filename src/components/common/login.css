@@ -1,0 +1,9 @@
+
+.example {
+    position:fixed; top:40%;left:0; right:0; bottom:0; margin:auto;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 30px 50px;
+    margin: 20px 0;
+  }
