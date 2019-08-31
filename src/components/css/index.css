@@ -1,6 +1,6 @@
 * { touch-action: pan-y; } 
 /* .index{ width:100vw; height:100%;} */
-.index{width:100vw;}
+.index{width:100vw; height:100vh;}
 header {
     position:fixed; top:0;left:0; z-index: 10;
     width:100%; height:0.9rem; background: rgb(59, 152, 240);
@@ -41,7 +41,7 @@ header div{
 /* ------------ */
 
 footer{
-    width:100%; padding:0.2rem 0.15rem; 
+    width:100%; padding:0.2rem 0.15rem; background:#f3f3f3;
 }
 footer h2{
     margin:0.2rem 0.2rem 0.4rem; color:rgb(139, 139, 139);
@@ -73,7 +73,7 @@ footer h2{
 
 .siabar .imgs img{width:100%; }
 .siabar .imgs{float: left; width:0.8rem; height:0.8rem; border-radius: 50%;
-    overflow: hidden; line-height: 0.8rem; margin-right:0.3rem;
+    overflow: hidden; line-height: 0.8rem; margin-right:0.3rem; margin-top:0.1rem;
 }
 .siabar .text{float: left; margin-left:0.2rem; margin-top:0.25rem;}
 .siabar>#right{

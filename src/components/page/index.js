@@ -5,52 +5,9 @@ import Login from '../common/lodin'
 import $ from 'jquery';
 import moment from 'moment';
 import Newed from '../common/newed'
-// moment().format('MM-DD')
+import { Link} from 'react-router-dom'
+// moment().format('YYYYMMDD')
 class Index extends Component {
-   state = {
-       imgs:[],
-       newlist:[],
-       login:false,
-       newsEd:[],
-       isNewsEd:false,
-       numm:Number(moment().format('YYYYMMDD'))
-   }
-   componentDidMount(){
-    // console.log();
-    this.setState({
-        login:true
-    })
-       this.axios({
-           url:'/news/latest',
-           method:"get",
-       }).then(d=>{
-        this.setState({
-            login:false
-        })
-           this.setState({
-               imgs : d.data.stories,
-               newlist: d.data.top_stories,
-           })
-       });
-    //    滑动到底部时
-       $(window).scroll(()=>{
-        var doc_height = $(document).height();
-        var scroll_top = $(document).scrollTop(); 
-        var window_height = $(window).height();
-        // 生成日期:moment().format('MM-DD') /08-30
-        // var ingTime = Number(moment().format('YYYYMMDD'));
-        // var n=0;
-        if(scroll_top + window_height >= doc_height){
-            var n = 0; n+=1;
-            this.axios({
-                url:'/news/before/'+ (this.state.numm - n),
-                method:'get'
-            }).then(d=>{
-              console.log(d);
-            })
-        }
-    });
-   }
     menu(){
         $("#cbl").css({"left":"0"});
         $("#right").css({"opacity":0.5});
@@ -60,8 +17,67 @@ class Index extends Component {
         $("#right").css({"opacity":0});
     }
     newList(id){
-
+        this.props.history.push('/list/'+id);
     }
+   state = {
+       imgs:[], //轮播图片
+       newlist:[], //首页新闻列表
+       login:false, //登录显示
+       newsEd:[], //新闻
+       isNewsEd:false, //是否显示加载
+       day:moment().format('YYYYMMDD'), //日期
+    //    numm:Number(moment().format('YYYYMMDD'))
+   }
+   componentWillUnmount(){
+    this.source.cancel('1234')
+   }
+   componentDidMount(){
+    let CancelToken = this.axios.CancelToken;
+    this.source = CancelToken.source();
+    // console.log();
+    this.setState({
+        login:true
+    })
+       this.axios({
+           url:'/news/latest',
+           method:"get",
+           cancelToken: this.source.token
+       }).then(d=>{
+        //    console.log(d);
+        this.setState({
+            login:false
+        })
+           this.setState({
+               imgs : d.data.stories,
+               newlist: d.data.top_stories,
+               day:d.data.date,
+           })
+       });
+
+    //    滑动到底部时
+       $(window).scroll(()=>{
+        var doc_height = $(document).height();
+        var scroll_top = $(document).scrollTop(); 
+        var window_height = $(window).height();
+
+        if(scroll_top + window_height >= doc_height){
+            this.axios({
+                url:'/news/before/'+ this.state.day,
+                method:'get',
+                cancelToken: this.source.token
+            }).then(d=>{
+             var ned = this.state.newsEd;
+             ned.push(d.data.stories)
+             this.setState({
+                newsEd:ned,
+                day:d.data.date
+             })
+            //  console.log(this.state.newsEd)
+            })
+        }
+    });
+   }
+
    render(){
          return(
             <div className='index'>
@@ -78,7 +94,7 @@ class Index extends Component {
                  <div className="banner">
                  <Carousel autoplay  dots="true">
                     {this.state.newlist.map(item=>{
-                        return <div key={item.id} className="bana_text">
+                        return <div key={item.id}  className="bana_text">
                         <img className="ban_img" src={item.image} alt="."/>
                         </div>
                     })}
@@ -89,20 +105,21 @@ class Index extends Component {
 
                  <footer>
                     <h2>今日热文</h2> 
-                    {this.state.imgs.map((item,index)=>{
-                        return  <div className="newbox clearfix" onChange={()=>this.newList(item.id)} 
-                        key={item.id}>
+                    {this.state.imgs.map(item=>{
+                        return <Link to={"/list/"+item.id} key={item.id}>
+                         <div className="newbox clearfix" onClick={()=>this.newList(item.id)}
+                        >
                         <p>{item.title}</p>
                         <div className="newright">
                             <img src={item.images} alt="."/>
                         </div>
                     </div>
+                    </Link>
                     })}
-                   {this.state.newsEd.map(item=>{
-                       return <Newed item={item}></Newed>
+                   {this.state.newsEd.map((item,index)=>{
+                       return <Newed key={index} day={this.state.day} item={item} onNewList={(e)=>this.newList(e)}></Newed>
                    })}
                 </footer>
-
                     
 
                 {/* 侧边栏 */}
@@ -118,7 +135,7 @@ class Index extends Component {
                             </span>
                             </div>
                             <div className="bottom">
-                            <Icon type="heart" className="sc"/><span className="aas">我的收藏</span> 
+                            <Link to="/coll"><Icon type="heart" className="sc"/><span  className="aas">我的收藏</span></Link> 
                             <Icon type="vertical-align-bottom" className="xz" /> <span>离线下载</span>
                             </div>
                         </div>

@@ -7,13 +7,16 @@ import './assets/css/reset.css'
 import {Switch,Route,Redirect} from 'react-router-dom';
 
 import Index from './components/page/index';
-
+import List from './components/page/list'
+import Coll from './components/page/coll'
 class App extends Component {
   render() {
     return (
       <div className="App">
           <Switch>
               <Route path='/index' component={Index}></Route>
+              <Route path='/list/:id' component={List}></Route>
+              <Route path='/coll' component={Coll}></Route>
               <Redirect to={'/index'}/>
           </Switch>
       </div>
