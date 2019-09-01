@@ -35,7 +35,7 @@ class Index extends Component {
    componentDidMount(){
     let CancelToken = this.axios.CancelToken;
     this.source = CancelToken.source();
-    // console.log();
+    console.log("测试");
     this.setState({
         login:true
     })
