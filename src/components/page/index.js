@@ -30,12 +30,10 @@ class Index extends Component {
    } 
    componentWillUnmount(){
     this.source.cancel('1234')
-    //11111111111111111111111111111111111111111111111111111111111111111
    }
    componentDidMount(){
     let CancelToken = this.axios.CancelToken;
     this.source = CancelToken.source();
-    console.log("测试");
     this.setState({
         login:true
     })

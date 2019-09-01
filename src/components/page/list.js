@@ -73,10 +73,11 @@ class List extends Component {
                 })
                 localStorage.setItem('collect',JSON.stringify(arr))
             })
-            
         }
-        
-            
+                    
+   }
+   plun(){
+       this.props.history.push('/discuss');
    }
    render(){
          return(
@@ -86,7 +87,7 @@ class List extends Component {
                     
                         <span className="top_logo1" ><Icon type="branches" /></span> 
                         <span className={this.state.isColl?"top_logos":"top_logo"} onClick={()=>this.collect()}><Icon type="star"  /></span> 
-                        <span className="top_logo2"><Icon type="message" />&nbsp; {this.state.pingL}</span>
+                        <span onClick={()=>this.plun()} className="top_logo2"><Icon type="message" />&nbsp; {this.state.pingL}</span>
                         <span className="top_logo3"><Icon type="like" />&nbsp;{this.state.dianz}</span>
                  
                  </header>
