@@ -26,10 +26,11 @@ class Index extends Component {
        newsEd:[], //新闻
        isNewsEd:false, //是否显示加载
        day:moment().format('YYYYMMDD'), //日期
-    //    numm:Number(moment().format('YYYYMMDD'))
-   }
+    //    numm:Number(moment().format('YYYYMMDD')) 
+   } 
    componentWillUnmount(){
     this.source.cancel('1234')
+    //11111111111111111111111111111111111111111111111111111111111111111
    }
    componentDidMount(){
     let CancelToken = this.axios.CancelToken;
