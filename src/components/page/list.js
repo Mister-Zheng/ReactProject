@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import '../css/list.css' 
 import {Icon} from 'antd'
 import API from '../../assets/js/api'
+import Login from '../common/lodin'
 // import $ from 'jquery';
 class List extends Component {
    state = {
@@ -10,21 +11,27 @@ class List extends Component {
        isColl:'',
        pingL:'',
        dianz:'',
+       shortComments:'',
+       login:false,
    }
    componentDidMount(){
         // console.log(this.props)
+        this.setState({
+            login:true
+        })
         var arrs = JSON.parse(localStorage.getItem("collect"));
         var iscollok = arrs.some(item=>item.id == this.props.match.params.id)
         this.setState({
             isColl:iscollok
         })
-
+        
         this.axios({
             url:API.list+this.state.id,
         }).then(d=>{
             // console.log(d);
             this.setState({
-                obj:d.data
+                obj:d.data,
+                login:false
             },()=>{
                 this.refs.body.innerHTML = this.state.obj.body;
             })
@@ -34,8 +41,9 @@ class List extends Component {
         }).then(d=>{
             //点赞popularity 评论comments
             this.setState({
-                pingL:d.data.comments,
-                dianz:d.data.popularity
+                pingL : d.data.comments,
+                dianz : d.data.popularity,
+                shortComments : d.data.comments,
             })
         })
    }
@@ -73,30 +81,31 @@ class List extends Component {
                 })
                 localStorage.setItem('collect',JSON.stringify(arr))
             })
-        }
-                    
+        }     
    }
    plun(){
-       this.props.history.push('/discuss');
+       this.props.history.push('/discuss/'+this.state.id+"/"+this.state.shortComments);
    }
    render(){
          return(
              <div className='list'>
-                 <header>
+                 <div className="header">
                     <Icon onClick={()=>this.goBack()} type="arrow-left"className="top_logo1" /> 
-                    
-                        <span className="top_logo1" ><Icon type="branches" /></span> 
-                        <span className={this.state.isColl?"top_logos":"top_logo"} onClick={()=>this.collect()}><Icon type="star"  /></span> 
-                        <span onClick={()=>this.plun()} className="top_logo2"><Icon type="message" />&nbsp; {this.state.pingL}</span>
-                        <span className="top_logo3"><Icon type="like" />&nbsp;{this.state.dianz}</span>
+                    <div>
+                        <Icon className="logo1" type="branches" />
+                        <Icon className={this.state.isColl?"top_logos":"top_logo"} onClick={()=>this.collect()} type="star"  />
+                        <Icon onClick={()=>this.plun()} className="logo2" type="message" /> {this.state.pingL}
+                        <Icon type="like" className="logo3" />{this.state.dianz}
+                    </div>
                  
-                 </header>
+                 </div>
                  <div className="imgs">
                  <img className="top_img" src={this.state.obj.image} alt="."/>  
                   <span className="spans">{this.state.obj.title}</span>  
                   <p>{this.state.obj.image_source} </p>
                  </div>
-
+                {/* 加载中 */}
+                {this.state.login? <Login></Login>: null}
                 {this.state.obj.css?<link rel="stylesheet" href={this.state.obj.css[0]}/>:null}
 
                  <div ref="body" className="texts"></div>

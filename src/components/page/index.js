@@ -100,7 +100,7 @@ class Index extends Component {
                 </Carousel>
                  </div>
                 
-                 {this.state.login? <Login></Login>: false}
+                 {this.state.login? <Login></Login>: null}
 
                  <footer>
                     <h2>今日热文</h2> 

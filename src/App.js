@@ -18,7 +18,7 @@ class App extends Component {
               <Route path='/index' component={Index}></Route>
               <Route path='/list/:id' component={List}></Route>
               <Route path='/coll' component={Coll}></Route>
-              <Route path="/discuss" component={Discuss}></Route>
+              <Route path="/discuss/:id/:comments" component={Discuss}></Route>
               <Redirect to={'/index'}/>
           </Switch>
       </div>

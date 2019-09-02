@@ -1,6 +1,6 @@
 
 .example {
-    position:fixed; top:40%;left:0; right:0; bottom:0; margin:auto;
+    position:fixed; top:40%;left:0; right:0; bottom:0; margin:auto; z-index: 99;
     text-align: center;
     border-radius: 4px;
     margin-bottom: 20px;
