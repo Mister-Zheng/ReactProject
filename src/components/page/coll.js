@@ -17,8 +17,7 @@ class Aaa extends Component {
     })
    }
    menu(){
-    $("#cbl").css({"left":"0"});
-    $("#right").css({"opacity":0.5});
+    this.props.history.push('/index');
    }
    render(){
          return(

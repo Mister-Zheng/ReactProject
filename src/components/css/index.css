@@ -75,7 +75,8 @@ footer h2{
 .siabar .imgs{float: left; width:0.8rem; height:0.8rem; border-radius: 50%;
     overflow: hidden; line-height: 0.8rem; margin-right:0.3rem; margin-top:0.1rem;
 }
-.siabar .text{float: left; margin-left:0.2rem; margin-top:0.25rem;}
+.siabar a{color:white;}
+.siabar .text{float: left; margin-left:1rem; margin-top:0.25rem;}
 .siabar>#right{
     flex: 1; background:black; opacity: 0; transition: 1s;
 }

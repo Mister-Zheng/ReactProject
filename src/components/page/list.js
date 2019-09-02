@@ -8,11 +8,11 @@ class List extends Component {
    state = {
        id:this.props.match.params.id,
        obj:{},
-       isColl:'',
-       pingL:'',
-       dianz:'',
-       shortComments:'',
-       login:false,
+       isColl:'', 
+       pingL:'',  //评论
+       dianz:'', //点赞数量
+       shortComments:'', //短评论数量
+       login:false, //加载中效果
    }
    componentDidMount(){
         // console.log(this.props)
@@ -20,7 +20,7 @@ class List extends Component {
             login:true
         })
         var arrs = JSON.parse(localStorage.getItem("collect"));
-        var iscollok = arrs.some(item=>item.id == this.props.match.params.id)
+        var iscollok = arrs.some(item=>item.id + "" === this.props.match.params.id)
         this.setState({
             isColl:iscollok
         })
