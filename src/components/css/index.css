@@ -1,6 +1,8 @@
 * { touch-action: pan-y; } 
 /* .index{ width:100vw; height:100%;} */
-.index{width:100vw; height:100vh;}
+.index{
+    width:100vw; height:100vh; 
+}
 header {
     position:fixed; top:0;left:0; z-index: 10;
     width:100%; height:0.9rem; background: rgb(59, 152, 240);
@@ -64,6 +66,7 @@ footer h2{
     display: flex; transition: 0.5s;
     position: fixed; top:0; left:-100%; z-index: 22;
     width:100vw; height:100vh;
+    touch-action: none;
 }
 .siabar>.left{
     width:70%; height:100%; background: rgb(252, 249, 249);

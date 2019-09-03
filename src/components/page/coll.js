@@ -23,7 +23,7 @@ class Aaa extends Component {
          return(
              <div className='coll'>
                  <header> 
-                    <Icon type="menu" className="top_logo1"  onClick={()=>this.menu()}/>
+                    <Icon type="menu" className="top_logo1"  onTouchEnd={()=>this.menu()}/>
                     <span>{this.state.collNum} 条收藏</span>
                     <div>   
                     </div>

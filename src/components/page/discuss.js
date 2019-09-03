@@ -58,7 +58,7 @@ class Discuss extends Component {
          return(
              <div className='discuss'>
                  <header>
-                    <Icon type="left" className="top_logo1" onClick={()=>this.goBack()} /> 
+                    <Icon type="left" className="top_logo1" onTouchEnd={()=>this.goBack()} /> 
                     <span>{this.props.match.params.comments} 条点评</span>
                     <div>   
                     <Icon type="form" className="top_logo3"/>   
@@ -80,7 +80,7 @@ class Discuss extends Component {
                 <div className="shortPl">
                      <div className="shortPl_top"> 
                      <span>{this.state.shortlens}{Number(this.props.match.params.comments) - Number(this.state.longlens)} 条短评</span>
-                     <i onClick={()=>this.shortPl()}><Icon type="up" /></i> 
+                     <i onTouchEnd={()=>this.shortPl()}><Icon type="up" /></i> 
                 </div>
                 {/* 加载中 */}
                 {this.state.login? <Login></Login>: null}

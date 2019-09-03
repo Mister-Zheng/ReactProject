@@ -19,8 +19,8 @@ class List extends Component {
         this.setState({
             login:true
         })
-        var arrs = JSON.parse(localStorage.getItem("collect"));
-        var iscollok = arrs.some(item=>item.id + "" === this.props.match.params.id)
+        var arrs =localStorage.getItem("collect")? JSON.parse(localStorage.getItem("collect")):[];
+        var iscollok = arrs.some(item=>item.id  == this.props.match.params.id)
         this.setState({
             isColl:iscollok
         })
@@ -90,11 +90,11 @@ class List extends Component {
          return(
              <div className='list'>
                  <div className="header">
-                    <Icon onClick={()=>this.goBack()} type="arrow-left"className="top_logo1" /> 
+                    <Icon onTouchEnd={()=>this.goBack()} type="arrow-left"className="top_logo1" /> 
                     <div>
                         <Icon className="logo1" type="branches" />
-                        <Icon className={this.state.isColl?"top_logos":"top_logo"} onClick={()=>this.collect()} type="star"  />
-                        <Icon onClick={()=>this.plun()} className="logo2" type="message" /> {this.state.pingL}
+                        <Icon className={this.state.isColl?"top_logos":"top_logo"} onTouchEnd={()=>this.collect()} type="star"  />
+                        <Icon onTouchEnd={()=>this.plun()} className="logo2" type="message" /> {this.state.pingL}
                         <Icon type="like" className="logo3" />{this.state.dianz}
                     </div>
                  

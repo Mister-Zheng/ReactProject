@@ -6,8 +6,10 @@ import $ from 'jquery';
 import moment from 'moment';
 import Newed from '../common/newed'
 import { Link} from 'react-router-dom'
+
 // moment().format('YYYYMMDD')
 class Index extends Component {
+    
     menu(){
         $("#cbl").css({"left":"0"});
         $("#right").css({"opacity":0.5});
@@ -16,10 +18,29 @@ class Index extends Component {
         $("#cbl").css("left","-100%");
         $("#right").css({"opacity":0});
     }
+    start(e){
+        this.setState({
+            startY:e.touches[0].clientY,
+            endY:0
+        })
+    }
+    move(e){
+        this.setState({
+            endY:e.touches[0].clientY,
+        })
+    }
     newList(id){
-        this.props.history.push('/list/'+id);
+        if(this.state.endY == 0){ //点击
+            this.props.history.push('/list/'+id);
+        }else{ //滑动
+            return 
+        }
+        
     }
    state = {
+      startY:0,
+      endY:0,
+
        imgs:[], //轮播图片
        newlist:[], //首页新闻列表
        login:false, //登录显示
@@ -79,13 +100,14 @@ class Index extends Component {
 
    render(){
          return(
+             
             <div className='index'>
     
                  <header> 
-                    <Icon type="menu" className="top_logo1" onClick={()=>this.menu()} />
+                    <Icon type="menu" className="top_logo1" onTouchEnd={()=>this.menu()} />
                     <span>首页</span>
                     <div>   
-                    <Icon type="bell" className="top_logo2" />
+                    <Icon type="bell" className="top_logo2" onTouchEnd={()=>this.erweima()}/>
                     <Icon type="more" className="top_logo3" />
                     </div>
                  </header>
@@ -106,7 +128,10 @@ class Index extends Component {
                     <h2>今日热文</h2> 
                     {this.state.imgs.map(item=>{
                         return <Link to={"/list/"+item.id} key={item.id}>
-                         <div className="newbox clearfix" onClick={()=>this.newList(item.id)}
+                         <div className="newbox clearfix"
+                        onTouchStart={(e)=>this.start(e)}
+                        onTouchMove={(e)=>this.move(e)}
+                         onTouchEnd={()=>this.newList(item.id)}
                         >
                         <p>{item.title}</p>
                         <div className="newright">
@@ -142,9 +167,11 @@ class Index extends Component {
                          <Icon type="home" className="shouye" /> 首页
                         </div>
                     </div>
-                    <div id="right" className="right" onClick={()=>this.right()}></div>
+                    <div id="right" className="right" onTouchEnd={()=>this.right()}></div>
                 </div>
             </div>
    )}
 }
+
+
 export default Index
